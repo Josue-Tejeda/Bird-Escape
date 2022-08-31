@@ -16,7 +16,7 @@ public class duck_movement : MonoBehaviour
 
     //Animation variables
     public Animator animator;
-    public bool isWalking;
+    bool isWalking;
     bool gameStarted;
     bool startFlying;
 
@@ -29,23 +29,33 @@ public class duck_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Get duck position to compare if its walking or standing
         float posX = transform.position.x * Time.deltaTime;
         if (!gameStarted) walkingStart();
 
         if (transform.position.x * Time.deltaTime == posX) isWalking = false;
         else isWalking = true;
 
-        if (Input.GetMouseButton(0))
+        // Checking when game starts
+        if (Input.GetMouseButton(0) && !gameStarted)
         {
             gameStarted = true;
             StartCoroutine(gameStarter());
-        } 
+            transform.position = Vector3.MoveTowards(transform.position, 
+                new Vector3(transform.position.x, transform.position.y + 5),
+                walkingSpeed * Time.deltaTime);
+        }
+
         if (gameStarted && startFlying) fly();
 
+            
 
+        // Variables to trigger animation
         animator.SetBool("walking", isWalking);
         animator.SetBool("gameStarted", gameStarted);
 
+
+        // Gettin position to compare if duck its moving
         posX = transform.position.x * Time.deltaTime;
     }
 
@@ -70,20 +80,21 @@ public class duck_movement : MonoBehaviour
 
         //Flip character
         Vector3 characterScale = transform.localScale;
-        if (transform.position.x > lastClickPos.x) characterScale.x = 1;
-        if (transform.position.x < lastClickPos.x) characterScale.x = -1;
+        if (transform.position.x > lastClickPos.x) characterScale.x = Mathf.Abs(characterScale.x);
+        if (transform.position.x < lastClickPos.x)  characterScale.x *= -1;
         transform.localScale = characterScale;
     }
     
     void walkingStart()
     {
         transform.position = Vector3.MoveTowards(transform.position, new Vector2(position_to_moveX, transform.position.y), walkingSpeed * Time.deltaTime);
-        
+
         //Flip character
         Vector3 characterScale = transform.localScale;
-        if (transform.position.x > position_to_moveX) characterScale.x = 1;
-        if (transform.position.x < position_to_moveX) characterScale.x = -1;
+        if (transform.position.x > lastClickPos.x) characterScale.x = Mathf.Abs(characterScale.x);
+        if (transform.position.x < lastClickPos.x) characterScale.x *= -1;
         transform.localScale = characterScale;
+
         if (walkEnded)
         {
             StartCoroutine(walking());
