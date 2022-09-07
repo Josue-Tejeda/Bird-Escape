@@ -80,8 +80,8 @@ public class duck_movement : MonoBehaviour
 
         //Flip character
         Vector3 characterScale = transform.localScale;
-        if (transform.position.x > lastClickPos.x) characterScale.x = Mathf.Abs(characterScale.x);
-        if (transform.position.x < lastClickPos.x)  characterScale.x *= -1;
+        if (transform.position.x > lastClickPos.x) characterScale.x = 1;
+        if (transform.position.x < lastClickPos.x) characterScale.x = -1;
         transform.localScale = characterScale;
     }
     
@@ -91,8 +91,8 @@ public class duck_movement : MonoBehaviour
 
         //Flip character
         Vector3 characterScale = transform.localScale;
-        if (transform.position.x > lastClickPos.x) characterScale.x = Mathf.Abs(characterScale.x);
-        if (transform.position.x < lastClickPos.x) characterScale.x *= -1;
+        if (transform.position.x > position_to_moveX) characterScale.x = 1;
+        if (transform.position.x < position_to_moveX) characterScale.x = -1;
         transform.localScale = characterScale;
 
         if (walkEnded)
