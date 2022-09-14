@@ -5,7 +5,7 @@ using UnityEngine;
 public class duck_movement : MonoBehaviour
 {
     // Move player with click variables
-    public float moveSpeed = 10f;
+    public float moveSpeed = 10f; 
     Vector2 lastClickPos;
     bool moving;
     
@@ -87,7 +87,9 @@ public class duck_movement : MonoBehaviour
     
     void walkingStart()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector2(position_to_moveX, transform.position.y), walkingSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position,
+            new Vector2(position_to_moveX, transform.position.y), 
+            walkingSpeed * Time.deltaTime);
 
         //Flip character
         Vector3 characterScale = transform.localScale;

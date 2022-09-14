@@ -15,11 +15,6 @@ public class target : MonoBehaviour
 
     private void Update()
     {
-        
-    }
-
-    private void FixedUpdate()
-    {
         transform.position = new Vector3(transform.position.x + moveXSpeed * Time.deltaTime, transform.position.y + moveYSpeed * Time.deltaTime);
     }
 
