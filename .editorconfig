@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS1522: Bloque switch vacío
+dotnet_diagnostic.CS1522.severity = none

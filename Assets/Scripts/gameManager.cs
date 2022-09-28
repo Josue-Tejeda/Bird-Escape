@@ -1,21 +1,52 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static gameManager instance;
+    public static GameManager instance;
 
+    public GameState State;
 
-    // Start is called before the first frame update
-    void Start()
+    public static event Action<GameState> OnGameStateChanged;
+
+    private void Awake()
     {
-
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        UpdateGameState(GameState.Menu);
     }
+
+    public void UpdateGameState(GameState newState)
+    {
+        State = newState;
+
+        switch (newState)
+        {
+            case GameState.Menu:
+                break;
+            case GameState.Playing:
+                break;
+            case GameState.Won:
+                break;
+            case GameState.Lose:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+        }
+
+        OnGameStateChanged?.Invoke(newState);
+    }
+}
+
+public enum GameState
+{
+    Menu,
+    Playing,
+    Won,
+    Lose
 }
