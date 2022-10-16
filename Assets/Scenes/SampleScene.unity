@@ -438,6 +438,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c41488e9fd9a4943a4d14fa76f92723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &381043482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1877043493387025798, guid: 5144d673bcf556d4ca67ae66e9f15c67, type: 3}
+  m_PrefabInstance: {fileID: 656436732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &422787605
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +514,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveXSpeed: 2
   moveYSpeed: 2
+  isFollow: 0
+  player: {fileID: 0}
 --- !u!212 &422787609
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -680,6 +687,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveXSpeed: 2
   moveYSpeed: 2
+  isFollow: 0
+  player: {fileID: 0}
 --- !u!212 &458448835
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1600,7 +1609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1584504540
 Transform:
   m_ObjectHideFlags: 0
@@ -1804,6 +1813,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveXSpeed: 2
   moveYSpeed: 2
+  isFollow: 1
+  player: {fileID: 381043482}
 --- !u!58 &1659708389
 CircleCollider2D:
   m_ObjectHideFlags: 0
