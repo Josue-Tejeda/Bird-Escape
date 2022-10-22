@@ -7,12 +7,12 @@ public class target : MonoBehaviour
     public float moveXSpeed = 2f;
     public float moveYSpeed = 2f;
     public bool isFollow = false;
-    public GameObject player;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.Find("duck_player");
     }
 
     private void Update()

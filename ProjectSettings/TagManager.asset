@@ -8,6 +8,7 @@ TagManager:
   - bLeft
   - bUp
   - bDown
+  - duck_player
   layers:
   - Default
   - TransparentFX
