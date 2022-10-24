@@ -53,4 +53,7 @@ public class target_manager : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(7f, 15f));
         changeFollowtarget = true;
     }
+
+
+    
 }

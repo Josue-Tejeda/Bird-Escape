@@ -119,4 +119,10 @@ public class duck_movement : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, lastClickPos, 3f * Time.deltaTime);
     }
 
+    public void death()
+    {
+        //Death animation
+        //Death sounds
+        //Change gameState to game over
+    }
 }
