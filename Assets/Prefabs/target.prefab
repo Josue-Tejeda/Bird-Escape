@@ -102,7 +102,6 @@ MonoBehaviour:
   moveXSpeed: 2
   moveYSpeed: 2
   isFollow: 0
-  player: {fileID: 1877043493387025798, guid: 5144d673bcf556d4ca67ae66e9f15c67, type: 3}
 --- !u!58 &5023385388672415479
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -110,7 +109,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5023385388672415475}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

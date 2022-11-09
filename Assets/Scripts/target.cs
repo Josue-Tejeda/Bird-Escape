@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class target : MonoBehaviour
 {
+    //Target variables and components
     public float moveXSpeed = 2f;
     public float moveYSpeed = 2f;
     public bool isFollow = false;
+    private CircleCollider2D circleCollider;
 
     //Shooting variables
     private bool isShooting = false;
@@ -17,6 +19,8 @@ public class target : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("duck_player");
+        circleCollider = gameObject.GetComponent<CircleCollider2D>();
+        StartCoroutine(TurnCollider());
     }
 
     private void Update()
@@ -52,9 +56,15 @@ public class target : MonoBehaviour
     private IEnumerator shot()
     {
         isShooting = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.3f);
         isShooting = false;
         yield return new WaitForSeconds(Random.Range(3f, 10f));
         shootCooldown = true;
+    }
+
+    private IEnumerator TurnCollider()
+    {
+        yield return new WaitForSeconds(2f);
+        circleCollider.enabled = true;
     }
 }

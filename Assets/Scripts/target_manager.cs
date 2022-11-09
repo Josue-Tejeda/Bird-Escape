@@ -50,7 +50,7 @@ public class target_manager : MonoBehaviour
         {
             if (i != targetFollowIndex) Targets[i].GetComponent<target>().isFollow = false;
         }
-        yield return new WaitForSeconds(Random.Range(7f, 15f));
+        yield return new WaitForSeconds(Random.Range(12f, 25f));
         changeFollowtarget = true;
     }
 
