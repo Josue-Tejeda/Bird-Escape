@@ -5,10 +5,12 @@ using UnityEngine;
 public class duck_movement : MonoBehaviour
 {
     // Move player with click variables
-    public float moveSpeed = 10f; 
+    public float moveSpeed = 10f;
     Vector2 lastClickPos;
     bool moving;
-    
+    bool hasBeenShot;
+    bool timeToFall;
+
     // Walkin or iddle variables
     bool walkEnded = true;
     float walkingSpeed = 0.8f;
@@ -20,10 +22,12 @@ public class duck_movement : MonoBehaviour
     bool gameStarted;
     bool startFlying;
 
+    private Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -41,14 +45,14 @@ public class duck_movement : MonoBehaviour
         {
             gameStarted = true;
             StartCoroutine(gameStarter());
-            transform.position = Vector3.MoveTowards(transform.position, 
+            transform.position = Vector3.MoveTowards(transform.position,
                 new Vector3(transform.position.x, transform.position.y + 5),
                 walkingSpeed * Time.deltaTime);
         }
 
         if (gameStarted && startFlying) fly();
 
-            
+
 
         // Variables to trigger animation
         animator.SetBool("walking", isWalking);
@@ -84,11 +88,11 @@ public class duck_movement : MonoBehaviour
         if (transform.position.x < lastClickPos.x) characterScale.x = -1;
         transform.localScale = characterScale;
     }
-    
+
     void walkingStart()
     {
         transform.position = Vector3.MoveTowards(transform.position,
-            new Vector2(position_to_moveX, transform.position.y), 
+            new Vector2(position_to_moveX, transform.position.y),
             walkingSpeed * Time.deltaTime);
 
         //Flip character
@@ -100,13 +104,25 @@ public class duck_movement : MonoBehaviour
         if (walkEnded)
         {
             StartCoroutine(walking());
-        } 
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "target")
+        {
+            hasBeenShot = true;
+            moveSpeed = 0;
+            animator.SetBool("hasBeenShot", hasBeenShot);
+            StartCoroutine(shot());
+        }
     }
 
     private IEnumerator walking()
     {
         walkEnded = false;
-        position_to_moveX = Random.Range(-3,3);
+        position_to_moveX = Random.Range(-3, 3);
         yield return new WaitForSeconds(Random.Range(3, 8));
         walkEnded = true;
     }
@@ -119,10 +135,11 @@ public class duck_movement : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, lastClickPos, 3f * Time.deltaTime);
     }
 
-    public void death()
+    private IEnumerator shot()
     {
-        //Death animation
-        //Death sounds
-        //Change gameState to game over
+        yield return new WaitForSeconds(0.7f);
+        timeToFall = true;
+        animator.SetBool("timeToFall", timeToFall);
+        rb.gravityScale = 1;
     }
 }

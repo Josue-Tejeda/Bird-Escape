@@ -15,12 +15,15 @@ public class target : MonoBehaviour
     private bool shootCooldown = true;
     private GameObject player;
 
+    //Limit position
+    Camera cam;
+
     // Start is called before the first frame update
     void Start()
     {
+        cam = GetComponent<Camera>();
         player = GameObject.Find("duck_player");
         circleCollider = gameObject.GetComponent<CircleCollider2D>();
-        StartCoroutine(TurnCollider());
     }
 
     private void Update()
@@ -36,35 +39,24 @@ public class target : MonoBehaviour
             shootCooldown = false;
             StartCoroutine(shot());
         }
+
+        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+
+        if (pos.x < 0.0) moveXSpeed = Mathf.Abs(moveXSpeed);
+        if (1.0 < pos.x) moveXSpeed *= -1;
+        if (pos.y < 0.0) moveYSpeed = Mathf.Abs(moveYSpeed);
+        if (1.0 < pos.y) moveYSpeed *= -1;
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "bRight") moveXSpeed *= -1;
-        if (collision.gameObject.tag == "bLeft") moveXSpeed = Mathf.Abs(moveXSpeed);
-        if (collision.gameObject.tag == "bUp") moveYSpeed *= -1;
-        if (collision.gameObject.tag == "bDown") moveYSpeed = Mathf.Abs(moveYSpeed);
-
-        //Kill player if on targe
-        if (isShooting && collision.gameObject.tag == "duck_player")
-        {
-            player.GetComponent<duck_movement>().death();
-        }
-    }
-
-    private IEnumerator shot()
+      private IEnumerator shot()
     {
         isShooting = true;
-        yield return new WaitForSeconds(1.3f);
-        isShooting = false;
-        yield return new WaitForSeconds(Random.Range(3f, 10f));
-        shootCooldown = true;
-    }
-
-    private IEnumerator TurnCollider()
-    {
-        yield return new WaitForSeconds(2f);
         circleCollider.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        circleCollider.enabled = false;
+        yield return new WaitForSeconds(0.8f);
+        isShooting = false;
+        yield return new WaitForSeconds(Random.Range(2f, 6f));
+        shootCooldown = true;
     }
 }

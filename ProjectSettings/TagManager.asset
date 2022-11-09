@@ -9,6 +9,7 @@ TagManager:
   - bUp
   - bDown
   - duck_player
+  - target
   layers:
   - Default
   - TransparentFX
