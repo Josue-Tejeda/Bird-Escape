@@ -15,6 +15,10 @@ public class target : MonoBehaviour
     private bool shootCooldown = true;
     private GameObject player;
 
+    //Audio
+    public AudioSource src;
+    public AudioClip shotSfx;
+
     //Limit position
     Camera cam;
 
@@ -52,6 +56,8 @@ public class target : MonoBehaviour
     {
         isShooting = true;
         circleCollider.enabled = true;
+        src.clip = shotSfx;
+        src.Play();
         yield return new WaitForSeconds(0.5f);
         circleCollider.enabled = false;
         yield return new WaitForSeconds(0.8f);
