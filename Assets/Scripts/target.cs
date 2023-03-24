@@ -8,13 +8,15 @@ public class target : MonoBehaviour
     public float moveXSpeed = 3f;
     public float moveYSpeed = 3f;
     public bool isFollow = false;
-    private EdgeCollider2D targetCollider;
+    private CircleCollider2D targetCollider;
 
     //Shooting variables
     private bool isShooting = false;
     private bool shootCooldown = true;
     private GameObject player;
     private bool starCool = false;
+    private bool speedUpColdown = true;
+    private float speedCap = 6f;
 
     //Audio
     public AudioSource src;
@@ -28,7 +30,7 @@ public class target : MonoBehaviour
     {
         cam = GetComponent<Camera>();
         player = GameObject.Find("duck_player");
-        targetCollider = gameObject.GetComponent<EdgeCollider2D>();
+        targetCollider = gameObject.GetComponent<CircleCollider2D>();
         StartCoroutine(startColdown());
     }
 
@@ -36,15 +38,19 @@ public class target : MonoBehaviour
     {
         if (starCool) TargetLogic();
 
+        if (speedUpColdown && moveXSpeed < speedCap) StartCoroutine(speedUp());
 
         if (gameManager.Instance.State == GameState.Lose) StartCoroutine(destroyTarget());
+
+        //Workaround for bug (player is no dying if no moving)
+        if (isShooting && transform.position == player.transform.position) player.GetComponent<duck_movement>().isShot = true;
     }
 
      private void TargetLogic()
      {
         if (!isShooting)
         {
-            if (isFollow) transform.position = Vector2.MoveTowards(transform.position, player.transform.position, (moveXSpeed * 0.5f) * Time.deltaTime);
+            if (isFollow) transform.position = Vector2.MoveTowards(transform.position, player.transform.position, (moveXSpeed * 0.8f) * Time.deltaTime);
             else transform.position = new Vector3(transform.position.x + moveXSpeed * Time.deltaTime, transform.position.y + moveYSpeed * Time.deltaTime);
         }
 
@@ -66,12 +72,12 @@ public class target : MonoBehaviour
     private IEnumerator shot()
     {
         isShooting = true;
-        player.GetComponent<duck_movement>().isShooting = true;
         src.clip = shotSfx;
         src.Play();
+        targetCollider.enabled = true;
         yield return new WaitForSeconds(1f);
+        targetCollider.enabled = false;
         isShooting = false;
-        player.GetComponent<duck_movement>().isShooting = false;
         yield return new WaitForSeconds(Random.Range(2f, 6f));
         shootCooldown = true;
     }
@@ -86,6 +92,15 @@ public class target : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         Destroy(gameObject);
+    }
+
+    private IEnumerator speedUp()
+    {
+        speedUpColdown = false;
+        yield return new WaitForSecondsRealtime(35);
+        moveXSpeed *= 1.1f;
+        moveYSpeed *= 1.1f;
+        speedUpColdown = true;
     }
 
 }

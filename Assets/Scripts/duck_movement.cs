@@ -5,12 +5,14 @@ using UnityEngine;
 public class duck_movement : MonoBehaviour
 {
     // Move player with click variables
-    public float moveSpeed = 10f;
+    public float moveSpeed = 2.5f;
     Vector2 lastClickPos;
     bool moving;
     bool hasBeenShot;
     bool timeToFall;
-    public bool isShooting;
+    public bool isShot;
+    public bool speedUpColdown = true;
+    float speedCap = 4f;
 
     // Walkin or iddle variables
     bool walkEnded = true;
@@ -67,7 +69,14 @@ public class duck_movement : MonoBehaviour
         animator.SetBool("walking", isWalking);
         animator.SetBool("gameStarted", gameStarted);
 
+
+        //Workaround for bug (player is no dying if no moving)
+        if (isShot) Dead();
+
         StartCoroutine(isMoving());
+
+        // Speeding game
+        if (speedUpColdown && moveSpeed < speedCap) StartCoroutine(speedUp());
     }
 
     void fly()
@@ -111,12 +120,10 @@ public class duck_movement : MonoBehaviour
         transform.localScale = characterScale;
     }
 
-
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "target" & isShooting)
+        if (collision.gameObject.tag == "target")
         {
-            Debug.Log("POOm");
             Dead();
         }
     }
@@ -164,4 +171,13 @@ public class duck_movement : MonoBehaviour
         animator.SetBool("timeToFall", timeToFall);
         rb.gravityScale = 1;
     }
+
+    private IEnumerator speedUp()
+    {
+        speedUpColdown = false;
+        yield return new WaitForSecondsRealtime(35);
+        moveSpeed *= 1.2f;
+        speedUpColdown = true;
+    }
+
 }

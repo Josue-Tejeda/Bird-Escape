@@ -5,7 +5,7 @@ using UnityEngine;
 public class target_manager : MonoBehaviour
 {
     public GameObject targetPrefab;
-    private List<GameObject> Targets = new List<GameObject>();
+    public List<GameObject> Targets = new List<GameObject>();
 
     private bool spawnCooldown = true;
     private bool changeFollowtarget = true;
@@ -44,6 +44,7 @@ public class target_manager : MonoBehaviour
     {
         Vector3 spawnPos = new Vector3(Random.Range(-2.3f, 2.3f), Random.Range(-3f, 4f));
         GameObject target = Instantiate(targetPrefab, spawnPos, Quaternion.identity);
+        target.GetComponent<target>().isFollow = false;
         Targets.Add(target);
         yield return new WaitForSeconds(10f);
         spawnCooldown = true;
@@ -58,10 +59,11 @@ public class target_manager : MonoBehaviour
         {
             if (i != targetFollowIndex) Targets[i].GetComponent<target>().isFollow = false;
         }
-        yield return new WaitForSeconds(Random.Range(12f, 25f));
+        yield return new WaitForSeconds(Random.Range(14f, 25f));
         changeFollowtarget = true;
     }
 
 
-    
+
+
 }
