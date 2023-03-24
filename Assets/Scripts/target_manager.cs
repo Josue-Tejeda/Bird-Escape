@@ -20,6 +20,13 @@ public class target_manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.Instance.State == GameState.Playing) targetSpawner();
+
+    }
+
+
+    private void targetSpawner()
+    {
         if (spawnCooldown)
         {
             spawnCooldown = false;
@@ -35,7 +42,8 @@ public class target_manager : MonoBehaviour
 
     private IEnumerator SpawnTargets()
     {
-        GameObject target = Instantiate(targetPrefab);
+        Vector3 spawnPos = new Vector3(Random.Range(-2.3f, 2.3f), Random.Range(-3f, 4f));
+        GameObject target = Instantiate(targetPrefab, spawnPos, Quaternion.identity);
         Targets.Add(target);
         yield return new WaitForSeconds(10f);
         spawnCooldown = true;
@@ -45,8 +53,8 @@ public class target_manager : MonoBehaviour
     {
         int targetFollowIndex = Random.Range(0, Targets.Count); 
         Targets[targetFollowIndex].GetComponent<target>().isFollow = true;
-
-        for(int i = 0; i < Targets.Count; i++)
+        
+        for (int i = 0; i < Targets.Count; i++)
         {
             if (i != targetFollowIndex) Targets[i].GetComponent<target>().isFollow = false;
         }

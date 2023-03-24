@@ -5,15 +5,16 @@ using UnityEngine;
 public class target : MonoBehaviour
 {
     //Target variables and components
-    public float moveXSpeed = 2f;
-    public float moveYSpeed = 2f;
+    public float moveXSpeed = 3f;
+    public float moveYSpeed = 3f;
     public bool isFollow = false;
-    private CircleCollider2D circleCollider;
+    private EdgeCollider2D targetCollider;
 
     //Shooting variables
     private bool isShooting = false;
     private bool shootCooldown = true;
     private GameObject player;
+    private bool starCool = false;
 
     //Audio
     public AudioSource src;
@@ -27,11 +28,20 @@ public class target : MonoBehaviour
     {
         cam = GetComponent<Camera>();
         player = GameObject.Find("duck_player");
-        circleCollider = gameObject.GetComponent<CircleCollider2D>();
+        targetCollider = gameObject.GetComponent<EdgeCollider2D>();
+        StartCoroutine(startColdown());
     }
 
     private void Update()
-    { 
+    {
+        if (starCool) TargetLogic();
+
+
+        if (gameManager.Instance.State == GameState.Lose) StartCoroutine(destroyTarget());
+    }
+
+     private void TargetLogic()
+     {
         if (!isShooting)
         {
             if (isFollow) transform.position = Vector2.MoveTowards(transform.position, player.transform.position, (moveXSpeed * 0.5f) * Time.deltaTime);
@@ -44,6 +54,7 @@ public class target : MonoBehaviour
             StartCoroutine(shot());
         }
 
+
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
 
         if (pos.x < 0.0) moveXSpeed = Mathf.Abs(moveXSpeed);
@@ -52,17 +63,29 @@ public class target : MonoBehaviour
         if (1.0 < pos.y) moveYSpeed *= -1;
     }
 
-      private IEnumerator shot()
+    private IEnumerator shot()
     {
         isShooting = true;
-        circleCollider.enabled = true;
+        player.GetComponent<duck_movement>().isShooting = true;
         src.clip = shotSfx;
         src.Play();
-        yield return new WaitForSeconds(0.5f);
-        circleCollider.enabled = false;
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
         isShooting = false;
+        player.GetComponent<duck_movement>().isShooting = false;
         yield return new WaitForSeconds(Random.Range(2f, 6f));
         shootCooldown = true;
     }
+
+    private IEnumerator startColdown()
+    {
+        yield return new WaitForSeconds(1.5f);
+        starCool = true;
+    }
+
+    private IEnumerator destroyTarget()
+    {
+        yield return new WaitForSeconds(0.8f);
+        Destroy(gameObject);
+    }
+
 }

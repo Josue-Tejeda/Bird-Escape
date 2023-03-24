@@ -10,6 +10,7 @@ public class duck_movement : MonoBehaviour
     bool moving;
     bool hasBeenShot;
     bool timeToFall;
+    public bool isShooting;
 
     // Walkin or iddle variables
     bool walkEnded = true;
@@ -52,8 +53,10 @@ public class duck_movement : MonoBehaviour
         {
             fly();
             AudioSrc.mute = false;
-
+            if (!hasBeenShot) gameManager.Instance.UpdateGameState(GameState.Playing);
         }
+
+        if (hasBeenShot) Dead();
 
         if (walkEnded)
         {
@@ -109,15 +112,23 @@ public class duck_movement : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "target")
+        if (collision.gameObject.tag == "target" & isShooting)
         {
-            hasBeenShot = true;
-            moveSpeed = 0;
-            animator.SetBool("hasBeenShot", hasBeenShot);
-            StartCoroutine(shot());
+            Debug.Log("POOm");
+            Dead();
         }
+    }
+
+    private void Dead()
+    {
+        AudioSrc.Pause();
+        hasBeenShot = true;
+        gameManager.Instance.UpdateGameState(GameState.Lose);
+        moveSpeed = 0;
+        animator.SetBool("hasBeenShot", hasBeenShot);
+        StartCoroutine(shot());
     }
 
     private IEnumerator walking()

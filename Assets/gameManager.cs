@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class gameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static gameManager Instance;
 
     public GameState State;
 
@@ -13,12 +13,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void Start()
     {
-        UpdateGameState(GameState.Menu);
+        UpdateGameState(GameState.Walking);
     }
 
     public void UpdateGameState(GameState newState)
@@ -27,11 +27,11 @@ public class GameManager : MonoBehaviour
 
         switch (newState)
         {
-            case GameState.Menu:
+            case GameState.Walking:
+                break;
+            case GameState.Pause:
                 break;
             case GameState.Playing:
-                break;
-            case GameState.Won:
                 break;
             case GameState.Lose:
                 break;
@@ -41,12 +41,13 @@ public class GameManager : MonoBehaviour
 
         OnGameStateChanged?.Invoke(newState);
     }
+
 }
 
 public enum GameState
 {
-    Menu,
+    Walking,
+    Pause,
     Playing,
-    Won,
-    Lose
+    Lose,
 }
