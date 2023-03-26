@@ -5,9 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class ScenesAdmin : MonoBehaviour
 {
-    public void playGame()
+
+    [SerializeField] private GameObject pauseButton;
+    [SerializeField] private GameObject pauseMenu;
+
+    //Index changer (It only adds or substrac x value to the index scene)
+
+    public void PlusI()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void PlusII()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+    }
+
+    public void PlusIII()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
+    }
+
+    public void PlusIV()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
     }
 
     public void BackI()
@@ -25,28 +46,39 @@ public class ScenesAdmin : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 3);
     }
 
-    public void BackIIII()
+    public void BackIV()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 4);
     }
 
-    public void Cotrols()
+    //Pause, quit, continue and restart mechanics
+
+    public void Pause() 
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Debug.Log("Pausing.... timeScale set to 0f");
+        Time.timeScale = 0f;
+        pauseButton.SetActive(false);
+        pauseMenu.SetActive(true);
+    }
+    
+    public void Continue()
+    {
+        Debug.Log("continuing.... timeScale set to 1f");
+        Time.timeScale = 1f;
+        pauseButton.SetActive(true);
+        pauseMenu.SetActive(false);
     }
 
-    public void OptionsMenu()
+    public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        Debug.Log("Restarting.... timeScale set to 1f");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void Credits()
+    public void Quit()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
-    }
-
-    public void InGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 5);
+        Debug.Log("Closing this cotopla");
+        Application.Quit();
     }
 }
