@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -135,6 +136,21 @@ public class duck_movement : MonoBehaviour
         gameManager.Instance.UpdateGameState(GameState.Lose);
         moveSpeed = 0;
         animator.SetBool("hasBeenShot", hasBeenShot);
+
+
+        //ScenesAdmin component///////////////////////////////////////////////////////////////////
+        ScenesAdmin scenesAdmin = FindObjectOfType<ScenesAdmin>();
+
+        if (scenesAdmin != null)
+        {
+            scenesAdmin.GameOver();
+        }
+        else
+        {
+            Debug.LogError("ScenesAdmin not found in the scene, busca bien xdd");
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////
+
         StartCoroutine(shot());
     }
 
@@ -179,5 +195,4 @@ public class duck_movement : MonoBehaviour
         moveSpeed *= 1.2f;
         speedUpColdown = true;
     }
-
 }

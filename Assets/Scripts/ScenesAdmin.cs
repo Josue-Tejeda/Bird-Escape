@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ScenesAdmin : MonoBehaviour
 {
 
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] public GameObject GameOverMenu;
 
-    //Index changer (It only adds or substrac x value to the index scene)
+    //Index changer (It only adds or substrac x value to the index scene)/////////////////////////////////////////////
 
     public void PlusI()
     {
@@ -51,8 +53,7 @@ public class ScenesAdmin : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 4);
     }
 
-    //Pause, quit, continue and restart mechanics
-
+    //Pause, quit, continue and restart mechanics/////////////////////////////////////////////
     public void Pause() 
     {
         Debug.Log("Pausing.... timeScale set to 0f");
@@ -80,5 +81,14 @@ public class ScenesAdmin : MonoBehaviour
     {
         Debug.Log("Closing this cotopla");
         Application.Quit();
+    }
+
+    //GameOver components/////////////////////////////////////////////
+    public void GameOver()
+    {
+        Debug.Log("Mf is dead");
+        Time.timeScale = 0f;
+        pauseButton.SetActive(false);
+        GameOverMenu.SetActive(true);
     }
 }
