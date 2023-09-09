@@ -1374,6 +1374,7 @@ MonoBehaviour:
   pauseButton: {fileID: 1212621565}
   pauseMenu: {fileID: 719672477}
   GameOverMenu: {fileID: 1791593029}
+  audioSource: {fileID: 1122966228}
 --- !u!114 &1084095080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1941,8 +1942,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.248, y: 152}
-  m_SizeDelta: {x: 332.643, y: 54.686}
+  m_AnchoredPosition: {x: -74, y: 113}
+  m_SizeDelta: {x: 379.5333, y: 62.2388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1150724319
 MonoBehaviour:
@@ -1957,7 +1958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3764706, g: 0.8784314, b: 0.40392157, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2018,8 +2019,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.248, y: -383}
-  m_SizeDelta: {x: 187.279, y: 65.0969}
+  m_AnchoredPosition: {x: -9, y: -399}
+  m_SizeDelta: {x: 191.1865, y: 72.9119}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1179515008
 MonoBehaviour:
@@ -2067,7 +2068,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1084095079}
         m_TargetAssemblyTypeName: ScenesAdmin, Assembly-CSharp
-        m_MethodName: Quit
+        m_MethodName: BackI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2090,7 +2091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.30588236, b: 0.30588236, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2501,8 +2502,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6, y: -76.6677}
-  m_SizeDelta: {x: 254.93, y: 53.8241}
+  m_AnchoredPosition: {x: 4, y: -241}
+  m_SizeDelta: {x: 290.8657, y: 61.2579}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1437898815
 MonoBehaviour:
@@ -2560,6 +2561,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1084095079}
+        m_TargetAssemblyTypeName: ScenesAdmin, Assembly-CSharp
+        m_MethodName: Report
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1437898816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2573,7 +2586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9843137, g: 1, b: 0.5411765, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2761,8 +2774,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.248, y: 29.245277}
-  m_SizeDelta: {x: 332.643, y: 54.686}
+  m_AnchoredPosition: {x: -74.000015, y: -26.708673}
+  m_SizeDelta: {x: 379.5333, y: 62.2388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1530219545
 MonoBehaviour:
@@ -2777,7 +2790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3764706, g: 0.8784314, b: 0.40392157, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3244,7 +3257,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1084095079}
         m_TargetAssemblyTypeName: ScenesAdmin, Assembly-CSharp
-        m_MethodName: Quit
+        m_MethodName: BackI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

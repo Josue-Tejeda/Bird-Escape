@@ -136,22 +136,28 @@ public class duck_movement : MonoBehaviour
         gameManager.Instance.UpdateGameState(GameState.Lose);
         moveSpeed = 0;
         animator.SetBool("hasBeenShot", hasBeenShot);
+        StartCoroutine(shot());
 
-
-        //ScenesAdmin component///////////////////////////////////////////////////////////////////
+        //ScenesAdmin component////////////////////////////KERMIT///////////////////////////////////////
+        //It gets function 'GameOver' from 'ScenesAdmin' Script, this function triggers GameOver menu 
+        //and sets time scale to 0f
         ScenesAdmin scenesAdmin = FindObjectOfType<ScenesAdmin>();
 
         if (scenesAdmin != null)
         {
-            scenesAdmin.GameOver();
+            IEnumerator GameOverCoroutine()
+            {
+                yield return new WaitForSeconds(3f);
+                scenesAdmin.GameOver();
+            }
+            Debug.Log("Calling <ScenesAdmin.GameOver()> function");
+            StartCoroutine(GameOverCoroutine());
         }
         else
         {
             Debug.LogError("ScenesAdmin not found in the scene, busca bien xdd");
         }
-        //////////////////////////////////////////////////////////////////////////////////////////
-
-        StartCoroutine(shot());
+        ///////////////////////////////////////////////////KERMIT///////////////////////////////////////
     }
 
     private IEnumerator walking()
