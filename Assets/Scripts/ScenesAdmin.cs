@@ -7,65 +7,67 @@ using UnityEngine.UI;
 public class ScenesAdmin : MonoBehaviour
 {
 
+	//Score objects
+	public Text scoreText;
+	public float scoreAmount;
+	public float pointIncreasePerSecond;
+	private float i;
+	public bool counter;
+
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] public GameObject GameOverMenu;
-
+	
     public AudioSource audioSource;
+	
+	// Update is called once per frame
+	void Start()
+    {
+		scoreAmount = 0f;
+		pointIncreasePerSecond = 1f;
+		counter = true;
+    }
+	
+	// Update is called once per frame
+    void Update()
+    {
+		i = 1f;
+		scoreText.text = scoreAmount.ToString();
+		
+		if (counter == true)
+		{
+			i ++;
+			scoreAmount += pointIncreasePerSecond * i;
+		}
+		else
+		{
+			Debug.Log("Couter has stopped");
+		}
+    }
 
     //Index changer (It only adds or substrac x value to the index scene)/////////////////////////////////////////////
 
-    public void PlusI()
-    {
+    public void MainMenu()  {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("MainMenu");
     }
-
-    public void PlusII()
-    {
+    public void SampleScene() {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        SceneManager.LoadScene("SampleScene");
     }
-
-    public void PlusIII()
-    {
+    public void OptionsMenu() {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
+        SceneManager.LoadScene("OptionsMenu");
     }
-
-    public void PlusIV()
-    {
+    public void CreditsMenu() {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
-    }
-
-    public void BackI()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-    }
-
-    public void BackII()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
-    }
-
-    public void BackIII()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 3);
-    }
-
-    public void BackIV()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 4);
+        SceneManager.LoadScene("CreditsMenu");
     }
 
     //Pause, quit, continue and restart mechanics/////////////////////////////////////////////
     public void Pause()
     {
+		counter = false;
         Debug.Log("Pausing.... timeScale set to 0f");
         Time.timeScale = 0f;
         pauseButton.SetActive(false);
@@ -84,6 +86,7 @@ public class ScenesAdmin : MonoBehaviour
 
     public void Continue()
     {
+		counter = true;
         Debug.Log("continuing.... timeScale set to 1f");
         Time.timeScale = 1f;
         pauseButton.SetActive(true);
@@ -114,7 +117,7 @@ public class ScenesAdmin : MonoBehaviour
         Application.Quit();
     }
 
-    //GameOver components/////////////////////////////////////////////
+    //GameOver components///////////////////////////////////////////
     IEnumerator GameOverCoroutine()
     {
         yield return new WaitForSeconds(4f);
@@ -127,12 +130,6 @@ public class ScenesAdmin : MonoBehaviour
         Time.timeScale = 0f;
         pauseButton.SetActive(false);
         GameOverMenu.SetActive(true);
-    }
-
-    public void Report()
-    {
-        float time = Time.timeScale;
-        Debug.Log("Time scale is: " + time);
     }
 
 }

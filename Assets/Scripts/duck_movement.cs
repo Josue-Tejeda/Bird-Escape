@@ -142,9 +142,11 @@ public class duck_movement : MonoBehaviour
         //It gets function 'GameOver' from 'ScenesAdmin' Script, this function triggers GameOver menu 
         //and sets time scale to 0f
         ScenesAdmin scenesAdmin = FindObjectOfType<ScenesAdmin>();
-
+		
         if (scenesAdmin != null)
         {
+			scenesAdmin.counter = false;
+			
             IEnumerator GameOverCoroutine()
             {
                 yield return new WaitForSeconds(3f);
@@ -155,7 +157,7 @@ public class duck_movement : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ScenesAdmin not found in the scene, busca bien xdd");
+            Debug.LogError("ScenesAdmin not found in scene, busca bien xdd");
         }
         ///////////////////////////////////////////////////KERMIT///////////////////////////////////////
     }

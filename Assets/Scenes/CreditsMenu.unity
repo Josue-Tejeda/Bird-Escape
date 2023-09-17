@@ -2127,8 +2127,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7724d87521d4f884aa9cf2262ae5404b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
+  scoreAmount: 0
+  pointIncreasePerSecond: 0
+  counter: 0
   pauseButton: {fileID: 0}
   pauseMenu: {fileID: 0}
+  GameOverMenu: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!114 &1369897013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2869,7 +2875,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1369897012}
         m_TargetAssemblyTypeName: ScenesAdmin, Assembly-CSharp
-        m_MethodName: BackI
+        m_MethodName: OptionsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
