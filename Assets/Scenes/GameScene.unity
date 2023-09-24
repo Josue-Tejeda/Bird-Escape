@@ -1293,6 +1293,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: duck_player
       objectReference: {fileID: 0}
+    - target: {fileID: 1877043493387025798, guid: 5144d673bcf556d4ca67ae66e9f15c67, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1877043493387025807, guid: 5144d673bcf556d4ca67ae66e9f15c67, type: 3}
       propertyPath: m_Radius
       value: 0.19534701
@@ -1435,9 +1439,9 @@ RectTransform:
   m_Father: {fileID: 1084095083}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 164, y: 675.75}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -236, y: -35.25}
   m_SizeDelta: {x: 561.5579, y: 103.2746}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &763573639
@@ -2967,10 +2971,10 @@ RectTransform:
   m_Father: {fileID: 1084095083}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -344.93298, y: 661.3325}
-  m_SizeDelta: {x: 57.0704, y: 74.4486}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 55.067017, y: -49.66748}
+  m_SizeDelta: {x: 57.070404, y: 74.44861}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1244526512
 GameObject:

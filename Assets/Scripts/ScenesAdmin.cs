@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,8 +29,17 @@ public class ScenesAdmin : MonoBehaviour
 		scoreAmount = 0f;
 		pointIncreasePerSecond = 1f;
 		counter = true;
-		
-		HigherScoreText.text = PlayerPrefs.GetFloat("highCounter", 0).ToString();
+
+        try
+        {
+            HigherScoreText.text = PlayerPrefs.GetFloat("highCounter", 0).ToString();
+        }
+        catch (Exception e)
+        {
+            return;
+        }
+
+        
 		 
     }
 	
@@ -61,9 +71,9 @@ public class ScenesAdmin : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
-    public void SampleScene() {
+    public void GameScene() {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("GameScene");
     }
     public void OptionsMenu() {
         Time.timeScale = 1f;

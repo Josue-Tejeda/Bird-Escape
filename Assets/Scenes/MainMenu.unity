@@ -436,7 +436,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1979518083}
         m_TargetAssemblyTypeName: ScenesAdmin, Assembly-CSharp
-        m_MethodName: SampleScene
+        m_MethodName: GameScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3569,12 +3569,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
+  FinalScoreText: {fileID: 0}
+  HigherScoreText: {fileID: 0}
   scoreAmount: 0
   pointIncreasePerSecond: 0
   counter: 0
   pauseButton: {fileID: 0}
   pauseMenu: {fileID: 0}
   GameOverMenu: {fileID: 0}
+  Score: {fileID: 0}
   audioSource: {fileID: 0}
 --- !u!1 &2063056268
 GameObject:
