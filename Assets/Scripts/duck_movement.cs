@@ -24,7 +24,7 @@ public class duck_movement : MonoBehaviour
     public Animator animator;
     bool isWalking;
     bool gameStarted;
-    bool startFlying;
+    public bool startFlying;
 
     //Audio
     public AudioSource AudioSrc;
