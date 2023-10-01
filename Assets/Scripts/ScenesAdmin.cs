@@ -93,6 +93,7 @@ public class ScenesAdmin : MonoBehaviour
         pauseMenu.SetActive(true);
 		Score.SetActive(false);
 
+
         if (audioSource != null)
         {
             Debug.Log("Pausing AudioSource");

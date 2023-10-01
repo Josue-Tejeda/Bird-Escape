@@ -42,6 +42,10 @@ public class duck_movement : MonoBehaviour
     {
         if (!gameStarted) walkingStart();
 
+        // Stop duck from moving when paused
+        if (Time.timeScale == 0) startFlying = false;
+        else startFlying = true;
+
         // Checking when game starts
         if (Input.GetMouseButton(0) && !gameStarted)
         {

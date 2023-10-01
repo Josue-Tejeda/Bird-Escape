@@ -75,7 +75,7 @@ public class target : MonoBehaviour
         src.clip = shotSfx;
         src.Play();
         targetCollider.enabled = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         targetCollider.enabled = false;
         isShooting = false;
         yield return new WaitForSeconds(Random.Range(2f, 6f));
