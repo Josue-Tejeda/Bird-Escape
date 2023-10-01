@@ -14,7 +14,6 @@ public class ScenesAdmin : MonoBehaviour
 	public Text HigherScoreText;
 	public float scoreAmount;
 	public float pointIncreasePerSecond;
-	private float i;
 	public bool counter;
 	
     [SerializeField] private GameObject pauseButton;
@@ -39,7 +38,7 @@ public class ScenesAdmin : MonoBehaviour
             return;
         }
 
-        
+        //ResetHighScore();
 		 
     }
 	
@@ -92,6 +91,7 @@ public class ScenesAdmin : MonoBehaviour
         Time.timeScale = 0f;
         pauseButton.SetActive(false);
         pauseMenu.SetActive(true);
+		Score.SetActive(false);
 
         if (audioSource != null)
         {
@@ -111,6 +111,7 @@ public class ScenesAdmin : MonoBehaviour
         Time.timeScale = 1f;
         pauseButton.SetActive(true);
         pauseMenu.SetActive(false);
+		Score.SetActive(true);
 
         if (audioSource != null)
         {
@@ -126,7 +127,6 @@ public class ScenesAdmin : MonoBehaviour
     public void Restart()
     {
         Debug.Log("Restarting.... timeScale set to 1f");
-		Debug.Log("Current HighScore" + HigherScoreText);
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -138,7 +138,7 @@ public class ScenesAdmin : MonoBehaviour
         Application.Quit();
     }
 
-    //GameOver components///////////////////////////////////////////
+    //GameOver components////////////////////////////////////////////
     IEnumerator GameOverCoroutine()
     {
         yield return new WaitForSeconds(4f);
@@ -153,20 +153,30 @@ public class ScenesAdmin : MonoBehaviour
         GameOverMenu.SetActive(true);
 		Score.SetActive(false);
 		
-		FinalScoreText.text = scoreAmount.ToString();
+		//Converts the scoreAmount to a TimeSpan
+		TimeSpan timeSpan = TimeSpan.FromSeconds(scoreAmount);
+			
+		//Format the TimeSpan as HH:mm:ss
+		string formattedTime = string.Format("{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+		FinalScoreText.text = formattedTime;
+		
 		HighCounter();
 
     }
 	
 	public void Counter()
 	{
-		i = 1f;
-		scoreText.text = scoreAmount.ToString();
 		
 		if (counter == true)
 		{
-			i ++;
-			scoreAmount += pointIncreasePerSecond * i;
+			scoreAmount += pointIncreasePerSecond * Time.deltaTime;
+			
+			//Converts the scoreAmount to a TimeSpan
+			TimeSpan timeSpan = TimeSpan.FromSeconds(scoreAmount);
+			
+			//Format the TimeSpan as HH:mm:ss
+			string formattedTime = string.Format("{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+			scoreText.text = formattedTime;
 		}
 		else
 		{
@@ -179,13 +189,34 @@ public class ScenesAdmin : MonoBehaviour
 		if (scoreAmount > PlayerPrefs.GetFloat("highCounter", 0))
 		{
 			PlayerPrefs.SetFloat("highCounter", scoreAmount);
-			HigherScoreText.text = scoreAmount.ToString();
 			
-			Debug.Log("HighScore saved :D, it is: " +  HigherScoreText);
+			//Converts the scoreAmount to a TimeSpan
+			TimeSpan timeSpan = TimeSpan.FromSeconds(scoreAmount);
+			
+			//Format the TimeSpan as HH:mm:ss
+			string formattedTime = string.Format("{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+			HigherScoreText.text = formattedTime;
+			
+			Debug.Log("HighScore saved :D");
 		}
 		else
 		{
+			TimeSpan timeSpan = TimeSpan.FromSeconds(PlayerPrefs.GetFloat("highCounter", 0));
+			string formattedTime = string.Format("{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+			HigherScoreText.text = formattedTime;
 			Debug.Log("Did not reach a high score");
 		}
 	}
+	
+	//Tool to reset higher score
+	public void ResetHighScore()
+	{
+		//Reset the high score by deleting the PlayerPrefs key
+		PlayerPrefs.DeleteKey("highCounter");
+		PlayerPrefs.Save();
+
+		//Update the UI text to show that the high score has been reset
+		HigherScoreText.text = "High Score: Not Set, it has been deleted";
+	}
+	
 }
