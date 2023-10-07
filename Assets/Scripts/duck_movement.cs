@@ -57,6 +57,7 @@ public class duck_movement : MonoBehaviour
         if (Input.GetMouseButton(0) && !gameStarted)
         {
             gameStarted = true;
+            AudioSrc.PlayOneShot(startQuack);
             StartCoroutine(gameStarter());
             transform.position = Vector3.MoveTowards(transform.position,
                 new Vector3(transform.position.x, transform.position.y + 5),
@@ -70,7 +71,6 @@ public class duck_movement : MonoBehaviour
             if (!hasBeenShot) gameManager.Instance.UpdateGameState(GameState.Playing);
         }
 
-        //if (hasBeenShot) Dead();
 
         if (walkEnded)
         {
@@ -131,11 +131,14 @@ public class duck_movement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (!hasBeenShot && collision.gameObject.tag == "target")
         {
+            
             hasBeenShot = true;
             AudioSrc.Stop();
             AudioSrc.loop = false;
+            AudioSrc.PlayOneShot(deadQuack);
             Dead();
         }
     }
@@ -143,8 +146,6 @@ public class duck_movement : MonoBehaviour
     private void Dead()
     {
         
-        Debug.Log("Helllo");
-        AudioSrc.PlayOneShot(startQuack);
         gameManager.Instance.UpdateGameState(GameState.Lose);
         moveSpeed = 0;
         animator.SetBool("hasBeenShot", hasBeenShot);
@@ -205,6 +206,7 @@ public class duck_movement : MonoBehaviour
     private IEnumerator shot()
     {
         yield return new WaitForSeconds(0.7f);
+        AudioSrc.PlayOneShot(falling);
         timeToFall = true;
         animator.SetBool("timeToFall", timeToFall);
         rb.gravityScale = 1;
