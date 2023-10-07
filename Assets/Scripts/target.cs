@@ -36,8 +36,6 @@ public class target : MonoBehaviour
 
     private void Update()
     {
-        if (starCool) TargetLogic();
-
         if (speedUpColdown && moveXSpeed < speedCap) StartCoroutine(speedUp());
 
         if (gameManager.Instance.State == GameState.Lose) StartCoroutine(destroyTarget());
@@ -46,11 +44,19 @@ public class target : MonoBehaviour
         if (isShooting && transform.position == player.transform.position) player.GetComponent<duck_movement>().isShot = true;
     }
 
-     private void TargetLogic()
+    private void FixedUpdate()
+    {
+        if (starCool) TargetLogic();
+    }
+    private void TargetLogic()
      {
         if (!isShooting)
         {
-            if (isFollow) transform.position = Vector2.MoveTowards(transform.position, player.transform.position, (moveXSpeed * 0.8f) * Time.deltaTime);
+            if (isFollow)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, (moveXSpeed * 0.6f) * Time.deltaTime);
+                if (player.transform.position == transform.position) transform.position = new Vector3(transform.position.x + 0.0001f, transform.position.y);
+            }
             else transform.position = new Vector3(transform.position.x + moveXSpeed * Time.deltaTime, transform.position.y + moveYSpeed * Time.deltaTime);
         }
 

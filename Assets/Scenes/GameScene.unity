@@ -1218,9 +1218,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1877043493387025793, guid: 5144d673bcf556d4ca67ae66e9f15c67, type: 3}
+      propertyPath: falling
+      value: 
+      objectReference: {fileID: 8300000, guid: e3cdc980d5af0b145bbfb75abf99f42b, type: 3}
+    - target: {fileID: 1877043493387025793, guid: 5144d673bcf556d4ca67ae66e9f15c67, type: 3}
       propertyPath: AudioSrc
       value: 
       objectReference: {fileID: 1122966228}
+    - target: {fileID: 1877043493387025793, guid: 5144d673bcf556d4ca67ae66e9f15c67, type: 3}
+      propertyPath: flapping
+      value: 
+      objectReference: {fileID: 8300000, guid: 86601359533883a4daed9d88888097fe, type: 3}
+    - target: {fileID: 1877043493387025793, guid: 5144d673bcf556d4ca67ae66e9f15c67, type: 3}
+      propertyPath: deadQuack
+      value: 
+      objectReference: {fileID: 8300000, guid: 92f40ff12acd4d24d94f635b13323b12, type: 3}
     - target: {fileID: 1877043493387025793, guid: 5144d673bcf556d4ca67ae66e9f15c67, type: 3}
       propertyPath: flyingSfx
       value: 
@@ -1229,6 +1241,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 2.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1877043493387025793, guid: 5144d673bcf556d4ca67ae66e9f15c67, type: 3}
+      propertyPath: startQuack
+      value: 
+      objectReference: {fileID: 8300000, guid: c72172126a10232449f464a69340bc2f, type: 3}
     - target: {fileID: 1877043493387025793, guid: 5144d673bcf556d4ca67ae66e9f15c67, type: 3}
       propertyPath: flyingSound
       value: 
@@ -1341,7 +1357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &719672478
 RectTransform:
   m_ObjectHideFlags: 0

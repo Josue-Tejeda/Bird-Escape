@@ -23,11 +23,15 @@ public class duck_movement : MonoBehaviour
     //Animation variables
     public Animator animator;
     bool isWalking;
-    bool gameStarted;
+    public bool gameStarted;
     public bool startFlying;
 
     //Audio
     public AudioSource AudioSrc;
+    public AudioClip flapping;
+    public AudioClip startQuack;
+    public AudioClip deadQuack;
+    public AudioClip falling;
 
     private Rigidbody2D rb;
 
@@ -46,6 +50,9 @@ public class duck_movement : MonoBehaviour
         if (Time.timeScale == 0) startFlying = false;
         else startFlying = true;
 
+        // stop duck from moving when dedad
+        if (hasBeenShot) startFlying = false;
+
         // Checking when game starts
         if (Input.GetMouseButton(0) && !gameStarted)
         {
@@ -63,7 +70,7 @@ public class duck_movement : MonoBehaviour
             if (!hasBeenShot) gameManager.Instance.UpdateGameState(GameState.Playing);
         }
 
-        if (hasBeenShot) Dead();
+        //if (hasBeenShot) Dead();
 
         if (walkEnded)
         {
@@ -74,9 +81,6 @@ public class duck_movement : MonoBehaviour
         animator.SetBool("walking", isWalking);
         animator.SetBool("gameStarted", gameStarted);
 
-
-        //Workaround for bug (player is no dying if no moving)
-        if (isShot) Dead();
 
         StartCoroutine(isMoving());
 
@@ -127,21 +131,25 @@ public class duck_movement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "target")
+        if (!hasBeenShot && collision.gameObject.tag == "target")
         {
+            hasBeenShot = true;
+            AudioSrc.Stop();
+            AudioSrc.loop = false;
             Dead();
         }
     }
 
     private void Dead()
     {
-        AudioSrc.Pause();
-        hasBeenShot = true;
+        
+        Debug.Log("Helllo");
+        AudioSrc.PlayOneShot(startQuack);
         gameManager.Instance.UpdateGameState(GameState.Lose);
         moveSpeed = 0;
         animator.SetBool("hasBeenShot", hasBeenShot);
         StartCoroutine(shot());
-
+        
         //ScenesAdmin component////////////////////////////KERMIT///////////////////////////////////////
         //It gets function 'GameOver' from 'ScenesAdmin' Script, this function triggers GameOver menu 
         //and sets time scale to 0f
@@ -163,6 +171,8 @@ public class duck_movement : MonoBehaviour
         {
             Debug.LogError("ScenesAdmin not found in scene, busca bien xdd");
         }
+
+
         ///////////////////////////////////////////////////KERMIT///////////////////////////////////////
     }
 
@@ -206,5 +216,10 @@ public class duck_movement : MonoBehaviour
         yield return new WaitForSecondsRealtime(35);
         moveSpeed *= 1.2f;
         speedUpColdown = true;
+    }
+
+    public void killDuck()
+    {
+        Destroy(gameObject);
     }
 }

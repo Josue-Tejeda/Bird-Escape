@@ -50,13 +50,13 @@ public class ScenesAdmin : MonoBehaviour
 		
 		if (instanceDuck != null) {
 			
-			if (instanceDuck.startFlying == true)
+			if (instanceDuck.gameStarted == true)
 			{
 				Counter();
 			}
 			else 
 			{
-				Debug.Log("Mani el pajaro no se esta moviendo");
+				//Debug.Log("Mani el pajaro no se esta moviendo");
 			}
 		///////////////////////////////////////////////////////////////
 		
@@ -148,11 +148,16 @@ public class ScenesAdmin : MonoBehaviour
 
     public void GameOver()
     {
+        //Destrying duck
+        FindObjectOfType<duck_movement>().killDuck();
+
         Debug.Log("Mf is dead");
         Time.timeScale = 0f;
         pauseButton.SetActive(false);
         GameOverMenu.SetActive(true);
 		Score.SetActive(false);
+
+		
 		
 		//Converts the scoreAmount to a TimeSpan
 		TimeSpan timeSpan = TimeSpan.FromSeconds(scoreAmount);
