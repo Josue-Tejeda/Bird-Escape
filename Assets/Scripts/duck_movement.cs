@@ -205,7 +205,7 @@ public class duck_movement : MonoBehaviour
 
     private IEnumerator shot()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.9f);
         AudioSrc.PlayOneShot(falling);
         timeToFall = true;
         animator.SetBool("timeToFall", timeToFall);

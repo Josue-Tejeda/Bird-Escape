@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -47,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 2
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -358,20 +360,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Front Clouds_3: -604393605
-      Front Clouds_5: 622660143
-      Front Clouds_1: 524126574
-      Front Clouds_9: -1246806277
-      Front Clouds_8: -498333043
-      Front Clouds_4: -1898435877
-      Front Clouds_6: 925352276
       Front Clouds_0: -450321443
-      Front Clouds_7: 1423617922
-      Front Clouds_2: -342268111
+      Front Clouds_1: 524126574
       Front Clouds_10: -783686221
-  spritePackingTag: 
+      Front Clouds_2: -342268111
+      Front Clouds_3: -604393605
+      Front Clouds_4: -1898435877
+      Front Clouds_5: 622660143
+      Front Clouds_6: 925352276
+      Front Clouds_7: 1423617922
+      Front Clouds_8: -498333043
+      Front Clouds_9: -1246806277
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

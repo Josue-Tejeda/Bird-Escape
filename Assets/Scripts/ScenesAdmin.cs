@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,8 +23,13 @@ public class ScenesAdmin : MonoBehaviour
 	[SerializeField] public GameObject Score;
 	
     public AudioSource audioSource;
-	
-	void Start()
+
+    //Menu Manager
+    [SerializeField] GameObject musicManager;
+	[SerializeField] private GameObject mutedButton;
+    [SerializeField] private GameObject soundButton;
+
+    void Start()
     {
 		scoreAmount = 0f;
 		pointIncreasePerSecond = 1f;
@@ -224,5 +230,20 @@ public class ScenesAdmin : MonoBehaviour
 		//Update the UI text to show that the high score has been reset
 		HigherScoreText.text = "High Score: Not Set, it has been deleted";
 	}
-	
+
+	public void Muted()
+	{
+		soundButton.active = true;
+		mutedButton.active = false;
+
+		musicManager.GetComponent<AudioSource>().mute = false;
+	}
+
+	public void Unmuted()
+	{
+        soundButton.active = false;
+        mutedButton.active = true;
+
+        musicManager.GetComponent<AudioSource>().mute = true;
+    }
 }
