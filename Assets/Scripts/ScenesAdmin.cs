@@ -236,14 +236,14 @@ public class ScenesAdmin : MonoBehaviour
 		soundButton.active = true;
 		mutedButton.active = false;
 
-		musicManager.GetComponent<AudioSource>().mute = false;
-	}
+        AudioListener.pause = true;
+    }
 
 	public void Unmuted()
 	{
         soundButton.active = false;
         mutedButton.active = true;
 
-        musicManager.GetComponent<AudioSource>().mute = true;
+        AudioListener.pause = true;
     }
 }
