@@ -4,12 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - bRight
-  - bLeft
-  - bUp
-  - bDown
-  - duck_player
+  - GameMusic
   - target
+  - duck_player
+  - InGame
   layers:
   - Default
   - TransparentFX
