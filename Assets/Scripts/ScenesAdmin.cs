@@ -67,7 +67,20 @@ public class ScenesAdmin : MonoBehaviour
 		///////////////////////////////////////////////////////////////
 		
 		}
-		
+
+        // Enable and disable muted buttoon
+        if (AudioListener.pause == false && soundButton != null && mutedButton != null)
+		{
+            soundButton.active = true;
+            mutedButton.active = false;
+        }
+        else if (AudioListener.pause == true && soundButton != null && mutedButton != null)
+        {
+            soundButton.active = false;
+            mutedButton.active = true;
+        }
+
+
     }
 
     //Index changer (It only adds or substrac x value to the index scene)/////////////////////////////////////////////
@@ -194,6 +207,8 @@ public class ScenesAdmin : MonoBehaviour
 		{
 			Debug.Log("Couter has stopped");
 		}
+
+	
 	}
 	
 	public void HighCounter()
@@ -233,17 +248,11 @@ public class ScenesAdmin : MonoBehaviour
 
 	public void Muted()
 	{
-		soundButton.active = true;
-		mutedButton.active = false;
-
-        AudioListener.pause = true;
+        AudioListener.pause = false;
     }
 
 	public void Unmuted()
 	{
-        soundButton.active = false;
-        mutedButton.active = true;
-
-        AudioListener.pause = true;
+		AudioListener.pause = true;
     }
 }
